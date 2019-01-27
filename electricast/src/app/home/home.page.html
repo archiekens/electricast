@@ -1,12 +1,28 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Ionic Blank
+      Dashboard
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
+  
 </ion-content>
+
+<ion-tab-bar slot="bottom">
+  <ion-tab-button href="/home">
+    <ion-icon name="calendar"></ion-icon>
+    <ion-label>Dashboard</ion-label>
+  </ion-tab-button>
+
+  <ion-tab-button href="/appliances-list" selected=true>
+    <ion-icon name="map"></ion-icon>
+    <ion-label>Appliances</ion-label>
+  </ion-tab-button>
+  
+  <ion-tab-button href="/rate-settings">
+    <ion-icon name="information-circle"></ion-icon>
+    <ion-label>Rate</ion-label>
+  </ion-tab-button>
+</ion-tab-bar>

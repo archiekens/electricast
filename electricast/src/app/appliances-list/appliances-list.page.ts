@@ -85,10 +85,6 @@ export class AppliancesListPage implements OnInit {
   }
 
   ngOnInit() {
-    setTimeout(function(){
-      this.title='LOL jk';
-      console.log(this.title);
-    }, 3000);
   }
 
   computePowers() {

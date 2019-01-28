@@ -5,7 +5,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', loadChildren: './home/home.module#HomePageModule' },
   { path: 'appliances-list', loadChildren: './appliances-list/appliances-list.module#AppliancesListPageModule' },
-  { path: 'appliance-details', loadChildren: './appliance-details/appliance-details.module#ApplianceDetailsPageModule' },
+  { path: 'appliance-details/:id', loadChildren: './appliance-details/appliance-details.module#ApplianceDetailsPageModule' },
   { path: 'rate-settings', loadChildren: './rate-settings/rate-settings.module#RateSettingsPageModule' },
 ];
 

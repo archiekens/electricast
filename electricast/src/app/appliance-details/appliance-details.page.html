@@ -1,9 +1,52 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>appliance_details</ion-title>
+    <ion-title>{{title}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+  <ion-card>
+    <ion-card-header>
+      <ion-item>
+        <ion-icon name="{{appliance.icon}}" slot="start"></ion-icon>
+        <ion-card-title>{{appliance.name}}</ion-card-title>
+        <ion-toggle checked="{{appliance.status}}" slot="end" (ionChange)="toggleAppliance(applianceIndex)"></ion-toggle>
+      </ion-item>
+    </ion-card-header>
 
+    <ion-card-content>
+      <ion-item>
+        <ion-icon name="alarm" slot="start"></ion-icon>
+        <ion-label>Time used: {{timeUsedInHuman}}</ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label position="fixed">
+          Wattage(W)
+        </ion-label>
+        <ion-input type="number" required=true [(ngModel)]="appliance.wattage"></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-button color="danger" (click)="defaultWattage()">Default</ion-button>
+        <ion-button color="light" (click)="resetWattage()">Reset</ion-button>
+        <ion-button (click)="updateWattage()">Save</ion-button>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
+
+<ion-tab-bar slot="bottom">
+  <ion-tab-button href="/home">
+    <ion-icon name="analytics"></ion-icon>
+    <ion-label>Dashboard</ion-label>
+  </ion-tab-button>
+
+  <ion-tab-button href="/appliances-list" selected=true>
+    <ion-icon name="bulb"></ion-icon>
+    <ion-label>Appliances</ion-label>
+  </ion-tab-button>
+  
+  <ion-tab-button href="/rate-settings">
+    <ion-icon name="flash"></ion-icon>
+    <ion-label>Rate</ion-label>
+  </ion-tab-button>
+</ion-tab-bar>

@@ -1,13 +1,27 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Dashboard
+      {{title}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>PHP {{totalBill}}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Quick Toggle</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button *ngFor="let key of objectKeys(appliances)" color="{{appliances[key].status ? 'primary' : 'light'}}" (click)="toggleAppliance(key)">
+        <ion-icon slot="icon-only" name="{{appliances[key].icon}}" size="large"></ion-icon>
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
 
 <ion-tab-bar slot="bottom">

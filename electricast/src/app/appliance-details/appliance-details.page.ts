@@ -14,9 +14,9 @@ export function provideStorage() {
 })
 export class ApplianceDetailsPage implements OnInit {
   title = 'Appliance Details';
-  // applianceIndex = 0;
-  // appliance = null;
-  // timeUsedInHuman = '';
+  applianceIndex = 0;
+  appliance = null;
+  timeUsedInHuman = '';
 
   constructor(
     private route: ActivatedRoute,

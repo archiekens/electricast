@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
-import { Storage } from '@ionic/storage';
 import { ToastController } from '@ionic/angular';
+
+import { Storage } from '@ionic/storage';
 export function provideStorage() {
- return new Storage();
+ return new Storage(null);
 }
 
 @Component({
@@ -22,13 +23,6 @@ export class ApplianceDetailsPage implements OnInit {
     private route: ActivatedRoute,
     private storage: Storage,
     public toastController: ToastController) {
-      this.route.paramMap.subscribe(params => {
-        this.applianceIndex = params.get("id");
-        storage.get('Appliances').then((result) => {
-          this.appliance = result[this.applianceIndex];
-          this.timeUsedInHuman = this.convertToHumanTime(this.appliance.timeUsed);
-        });
-      });
   }
 
   async presentToast(message, type) {
@@ -44,7 +38,13 @@ export class ApplianceDetailsPage implements OnInit {
   }
 
   ngOnInit() {
-
+    this.route.paramMap.subscribe(params => {
+      this.applianceIndex = parseInt(params.get("id"));
+      this.storage.get('Appliances').then((result) => {
+        this.appliance = result[this.applianceIndex];
+        this.timeUsedInHuman = this.convertToHumanTime(this.appliance.timeUsed);
+      });
+    });
   }
 
   resetWattage() {
@@ -54,9 +54,10 @@ export class ApplianceDetailsPage implements OnInit {
   }
 
   updateWattage() {
-    this.storage.get('Appliances').then((result) => {
+    let storage = this.storage;
+    storage.get('Appliances').then((result) => {
       result[this.applianceIndex].wattage = this.appliance.wattage;
-      this.storage.set('Appliances', result);
+      storage.set('Appliances', result);
       this.presentToast('Updated successfully', "success");
     }).catch((error) => {
       this.presentToast('Update failed', "danger");

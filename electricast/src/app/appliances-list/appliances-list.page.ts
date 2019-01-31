@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Storage } from '@ionic/storage';
 export function provideStorage() {
- return new Storage();
+ return new Storage(null);
 }
 
 @Component({
@@ -21,13 +22,13 @@ export class AppliancesListPage implements OnInit {
   timeUsedInHuman = [];
 
   constructor(private storage: Storage) {
-    storage.get('Appliances').then((result) => {
-      this.appliances = result;
-      this.computePowers();
-    });
   }
 
   ngOnInit() {
+    this.storage.get('Appliances').then((result) => {
+      this.appliances = result;
+      this.computePowers();
+    });
   }
 
   computePowers() {

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { Storage } from '@ionic/storage';
 export function provideStorage() {
- return new Storage();
+ return new Storage(null);
 }
 
 @Component({
@@ -13,83 +14,29 @@ export function provideStorage() {
 })
 export class HomePage {
 
-    objectKeys = Object.keys;
-    title = 'Dashboard';
-    appliances = [];
-    totalBill = 0;
-    defaultRate = 9.8385;
-
-    defaultAppliances = [
-    {
-      name: 'Light Bulb',
-      icon: 'bulb',
-      wattage: 15,
-      timeUsed: 0,
-      status: false,
-      lastUsed: null
-
-    },
-    {
-      name: 'Electric Fan',
-      icon: 'nuclear',
-      wattage: 55,
-      timeUsed: 0,
-      status: false,
-      lastUsed: null
-    },
-    {
-      name: 'Rice cooker',
-      icon: 'restaurant',
-      wattage: 450,
-      timeUsed: 0,
-      status: false,
-      lastUsed: null
-    },
-    {
-      name: 'Television',
-      icon: 'easel',
-      wattage: 180,
-      timeUsed: 0,
-      status: false,
-      lastUsed: null
-    },
-    {
-      name: 'Refrigerator',
-      icon: 'today',
-      wattage: 300,
-      timeUsed: 0,
-      status: false,
-      lastUsed: null
-    }
-  ];
+  objectKeys = Object.keys;
+  title = 'Dashboard';
+  appliances = [];
+  totalBill = 0;
 
   constructor(private router: Router, private storage: Storage) {
-    storage.get('app_opened_before').then((result) => {
-      if (result == false || result == null) {
-        storage.set('Appliances', this.defaultAppliances).then((result) => {
-          storage.set('app_opened_before', true);
-          this.appliances = this.defaultAppliances;
-          storage.set('Rate', this.defaultRate).then((result) => {
-            this.computeBill();
-          });
-        });
-      } else {
-        storage.get('Appliances').then((result) => {
-          this.appliances = result;
-          console.table(result);
-          this.computeBill();
-        });
-      }
+  }
+
+  ngOnInit(){
+    this.storage.get('Appliances').then((result) => {
+      this.appliances = result;
+      this.computeBill();
     });
   }
 
   toggleAppliance(applianceIndex) {
-    this.storage.get('Appliances').then((result) => {
+    let storage = this.storage;
+    storage.get('Appliances').then((result) => {
       result[applianceIndex].status = !result[applianceIndex].status;
       if (result[applianceIndex].status == true) {
         result[applianceIndex].lastUsed = this.getCurrentDateTime();
       }
-      this.storage.set('Appliances', result);
+      storage.set('Appliances', result);
       this.appliances = result;
     });
   }

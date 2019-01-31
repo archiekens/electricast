@@ -11,7 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { Storage } from '@ionic/storage';
 export function provideStorage() {
- return new Storage();
+ return new Storage(null);
 }
 
 @NgModule({

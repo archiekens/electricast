@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { ToastController } from '@ionic/angular';
+import { DEFAULT_APPLIANCES } from '../default-data'
 
 import { Storage } from '@ionic/storage';
 export function provideStorage() {
@@ -16,8 +17,17 @@ export function provideStorage() {
 export class ApplianceDetailsPage implements OnInit {
   title = 'Appliance Details';
   applianceIndex = 0;
-  appliance = null;
+  appliance = {
+    name: '',
+    icon: '',
+    wattage: 0,
+    timeUsed: 0,
+    status: false,
+    lastUsed: null
+
+  };
   timeUsedInHuman = '';
+  defaultAppliances = DEFAULT_APPLIANCES;
 
   constructor(
     private route: ActivatedRoute,
@@ -47,6 +57,10 @@ export class ApplianceDetailsPage implements OnInit {
     });
   }
 
+  defaultWattage(applianceIndex) {
+    this.appliance.wattage = this.defaultAppliances[applianceIndex].wattage;
+  }
+
   resetWattage() {
     this.storage.get('Appliances').then((result) => {
       this.appliance.wattage = result[this.applianceIndex].wattage;
@@ -58,9 +72,20 @@ export class ApplianceDetailsPage implements OnInit {
     storage.get('Appliances').then((result) => {
       result[this.applianceIndex].wattage = this.appliance.wattage;
       storage.set('Appliances', result);
-      this.presentToast('Updated successfully', "success");
+      this.presentToast('Updated successfully', "dark");
     }).catch((error) => {
       this.presentToast('Update failed', "danger");
+    });
+  }
+
+  toggleAppliance(applianceIndex) {
+    let storage = this.storage;
+    storage.get('Appliances').then((result) => {
+      result[applianceIndex].status = !result[applianceIndex].status;
+      if (result[applianceIndex].status == true) {
+        result[applianceIndex].lastUsed = this.getCurrentDateTime();
+      }
+      storage.set('Appliances', result);
     });
   }
 
@@ -80,6 +105,16 @@ export class ApplianceDetailsPage implements OnInit {
     }
 
     return time;
+  }
+
+  getCurrentDateTime() {
+    let now = new Date();
+    return now.getFullYear() + '/' +
+          (now.getMonth()+1) + '/' +
+          now.getDate() + ' ' +
+          now.getHours() + ':' +
+          now.getMinutes() + ':' +
+          now.getSeconds();
   }
 
 }

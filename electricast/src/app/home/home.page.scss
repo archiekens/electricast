@@ -1,1 +1,57 @@
+.total_bill-container {
+  position: relative;
+  height: 200px;
 
+  ion-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+
+    span {
+      font-weight: bold;
+      font-size: 2em;
+    }
+  }
+
+  ion-spinner {
+    height: 100%;
+    width: 100%;
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+ion-card-content {
+  ion-item {
+    color: #333;
+
+    ion-icon {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+}
+
+.button-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+
+  ion-button {
+    height: 120px;
+    width: 120px;
+  }
+}
+
+ion-tab-bar {
+  ion-tab-button {
+    color: #666;
+
+  }
+  ion-tab-button.active {
+    color: #3880ff;
+  }
+}

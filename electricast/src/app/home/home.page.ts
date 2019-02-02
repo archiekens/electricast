@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { DEFAULT_APPLIANCES, DEFAULT_RATE } from '../default-data';
 
 import { Storage } from '@ionic/storage';
 export function provideStorage() {
@@ -17,15 +18,35 @@ export class HomePage {
   objectKeys = Object.keys;
   title = 'Dashboard';
   appliances = [];
-  totalBill = 0;
+  totalBill = '0.00';
+  runningPowerRate = '0';
+  runningBillRate = '0.00';
+  runningAppliancesCount = 0;
+  defaultAppliances = DEFAULT_APPLIANCES;
+  defaultRate = DEFAULT_RATE;
 
   constructor(private router: Router, private storage: Storage) {
   }
 
   ngOnInit(){
-    this.storage.get('Appliances').then((result) => {
-      this.appliances = result;
-      this.computeBill();
+    let storage = this.storage;
+    storage.get('app_opened_before').then((result) => {
+      if (result == false || result == null) {
+        storage.set('Appliances', this.defaultAppliances).then((result) => {
+          storage.set('app_opened_before', true);
+          this.appliances = this.defaultAppliances;
+          storage.set('Rate', this.defaultRate).then((result) => {
+            this.computeBill();
+          });
+        });
+      } else {
+        storage.get('Appliances').then((result) => {
+          this.appliances = result;
+          storage.get('Appliances').then((result) => {
+            this.computeBill();
+          });
+        });
+      }
     });
   }
 
@@ -42,13 +63,30 @@ export class HomePage {
   }
 
   computeBill() {
-    let totalPower = 0;
-    for(let appliance of this.appliances) {
-      totalPower += (parseInt(appliance.wattage) * (parseInt(appliance.timeUsed) / 3600)) / 1000;
-    }
-    this.storage.get('Rate').then((result) => {
-      this.totalBill = totalPower * parseInt(result);
-    });
+    let self = this;
+    setInterval(function(){
+      self.storage.get('Appliances').then((result) => {
+        self.appliances = result;
+        let totalPower = 0;
+        let runningTotalWattage = 0;
+        let runningAppliances = 0;
+        for(let appliance of self.appliances) {
+          if (appliance.status == true) {
+            runningTotalWattage += parseInt(appliance.wattage);
+            runningAppliances += 1;
+          }
+          totalPower += (parseInt(appliance.wattage) * (parseInt(appliance.timeUsed) / 3600)) / 1000;
+        }
+        self.storage.get('Rate').then((result) => {
+          let rate = parseFloat(result);
+          let runningKiloWatts = runningTotalWattage / 1000;
+          self.totalBill = (totalPower * rate).toFixed(2);
+          self.runningPowerRate = (runningKiloWatts).toFixed(2);
+          self.runningBillRate = ((runningKiloWatts) * rate).toFixed(2);
+          self.runningAppliancesCount = runningAppliances;
+        });
+      });
+    }, 100);
   }
 
   getCurrentDateTime() {

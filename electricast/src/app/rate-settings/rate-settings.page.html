@@ -1,9 +1,45 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>rate_settings</ion-title>
+    <ion-title>{{title}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Enter the current rate per kwh</ion-card-title>
+      <ion-card-subtitle>If you are unsure, please take a look in your previous bill. Otherwise, you can use the default rate.</ion-card-subtitle>
+    </ion-card-header>
 
+    <ion-card-content>
+      <ion-item lines="none">
+        <ion-label position="fixed">
+          ₱/kwH
+        </ion-label>
+        <ion-input type="number" required=true [(ngModel)]="rate"></ion-input>
+      </ion-item>
+      <ion-item lines="none" class="button-options">
+        <ion-button color="danger" (click)="useDefaultRate()">Default</ion-button>
+        <ion-button color="light" (click)="resetRate()">Reset</ion-button>
+        <ion-button (click)="updateRate()">Save</ion-button>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
+
+<ion-tab-bar slot="bottom">
+  <ion-tab-button href="/home">
+    <ion-icon name="analytics"></ion-icon>
+    <ion-label>Dashboard</ion-label>
+  </ion-tab-button>
+
+  <ion-tab-button href="/appliances-list">
+    <ion-icon name="bulb"></ion-icon>
+    <ion-label>Appliances</ion-label>
+  </ion-tab-button>
+  
+  <ion-tab-button href="/rate-settings" class="active">
+    <ion-icon name="flash"></ion-icon>
+    <ion-label>Rate</ion-label>
+  </ion-tab-button>
+</ion-tab-bar>

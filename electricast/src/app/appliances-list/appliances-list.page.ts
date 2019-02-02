@@ -34,20 +34,10 @@ export class AppliancesListPage implements OnInit {
   computePowers() {
     for(let appliance of this.appliances) {
       let powerUsed = (parseInt(appliance.wattage) * (parseInt(appliance.timeUsed) / 3600)) / 1000;
-      this.powersUsed.push(powerUsed);
+      this.powersUsed.push(powerUsed.toFixed(2));
       this.timeUsedInHuman.push(this.convertToHumanTime(appliance.timeUsed));
       this.totalPower += powerUsed;
     }
-  }
-
-  toggleAppliance(applianceIndex) {
-    /* Todo:
-      If turned on:
-        start timer
-        set last used
-      else 
-        stop timer
-      */
   }
 
   convertToHumanTime(seconds) {

@@ -9,14 +9,34 @@
 <ion-content padding>
   <ion-card>
     <ion-card-header>
-      <ion-card-title>PHP {{totalBill}}</ion-card-title>
+      <ion-card-title>Estimated Bill</ion-card-title>
+      <ion-card-subtitle>Calculated bill for this month</ion-card-subtitle>
     </ion-card-header>
+    <ion-card-content>
+      <div class="total_bill-container">
+        <ion-text>₱<span>{{totalBill}}</span></ion-text>
+        <ion-spinner color="primary"></ion-spinner>
+      </div>
+      <ion-item lines="none">
+        <ion-icon name="power" slot="start"></ion-icon>
+          {{runningAppliancesCount}} appliances are running
+        </ion-item>
+      <ion-item lines="none">
+        <ion-icon name="flash" slot="start"></ion-icon>
+        {{runningPowerRate}}kW is used per hour
+      </ion-item>
+      <ion-item lines="none">
+        <ion-icon name="cash" slot="start"></ion-icon>
+        Bill goes up by ₱{{runningBillRate}} per hour
+      </ion-item>
+    </ion-card-content>
   </ion-card>
   <ion-card>
     <ion-card-header>
       <ion-card-title>Quick Toggle</ion-card-title>
+      <ion-card-subtitle>Tap a button to turn the appliance on or off</ion-card-subtitle>
     </ion-card-header>
-    <ion-card-content>
+    <ion-card-content class="button-list">
       <ion-button *ngFor="let key of objectKeys(appliances)" color="{{appliances[key].status ? 'primary' : 'light'}}" (click)="toggleAppliance(key)">
         <ion-icon slot="icon-only" name="{{appliances[key].icon}}" size="large"></ion-icon>
       </ion-button>
@@ -25,18 +45,18 @@
 </ion-content>
 
 <ion-tab-bar slot="bottom">
-  <ion-tab-button href="/home">
-    <ion-icon name="calendar"></ion-icon>
+  <ion-tab-button href="/home" class="active">
+    <ion-icon name="analytics"></ion-icon>
     <ion-label>Dashboard</ion-label>
   </ion-tab-button>
 
-  <ion-tab-button href="/appliances-list" selected=true>
-    <ion-icon name="map"></ion-icon>
+  <ion-tab-button href="/appliances-list">
+    <ion-icon name="bulb"></ion-icon>
     <ion-label>Appliances</ion-label>
   </ion-tab-button>
   
   <ion-tab-button href="/rate-settings">
-    <ion-icon name="information-circle"></ion-icon>
+    <ion-icon name="flash"></ion-icon>
     <ion-label>Rate</ion-label>
   </ion-tab-button>
 </ion-tab-bar>

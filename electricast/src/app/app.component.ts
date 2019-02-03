@@ -57,7 +57,7 @@ export class AppComponent {
             if (this.appliances[key].status == true && this.appliances[key].lastUsed != null) {
               let now: any = new Date();
               let lastUsedDate: any = new Date(this.appliances[key].lastUsed);
-              let missingTimeUsed: any = now - lastUsedDate;
+              let missingTimeUsed: any = (now - lastUsedDate) / 1000;
               this.appliances[key].timeUsed += missingTimeUsed;
             }
           }

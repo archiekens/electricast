@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Router, NavigationStart, NavigationEnd, NavigationError, NavigationCancel, RoutesRecognized } from '@angular/router';
 
 import { DEFAULT_APPLIANCES, DEFAULT_RATE } from './default-data';
 
@@ -14,10 +15,11 @@ export function provideStorage() {
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
+  styleUrls: ['app.component.scss'],
   providers: [{provide: Storage, useFactory: provideStorage}]
 })
 export class AppComponent {
-
+  title = '';
   objectKeys = Object.keys;
   defaultAppliances = DEFAULT_APPLIANCES;
   defaultRate = DEFAULT_RATE;
@@ -27,9 +29,31 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private storage: Storage
+    private storage: Storage,
+    private router: Router
   ) {
     this.initializeApp();
+    router.events.forEach((event) => {
+      if(event instanceof NavigationStart) {
+        switch (event.url) {
+          case "/dashboard/home":
+            this.title = 'Dashboard';
+            break;
+          case "/dashboard/appliances-list":
+            this.title = 'Appliances';
+            break;
+          case "/dashboard/rate-settings":
+            this.title = 'Rate Settings';
+            break;
+          case "/dashboard/appliance-details":
+            this.title = 'Appliance Detail';
+            break;
+          default:
+            this.title = 'Dashboard';
+            break;
+        }
+      }
+    });
   }
 
   initializeApp() {

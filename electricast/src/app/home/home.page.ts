@@ -16,7 +16,6 @@ export function provideStorage() {
 export class HomePage {
 
   objectKeys = Object.keys;
-  title = 'Dashboard';
   appliances = [];
   totalBill = '0.00';
   runningPowerRate = '0';

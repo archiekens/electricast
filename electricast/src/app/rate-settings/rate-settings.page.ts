@@ -14,7 +14,6 @@ export function provideStorage() {
   styleUrls: ['./rate-settings.page.scss'],
 })
 export class RateSettingsPage implements OnInit {
-  title = 'Rate Settings';
   rate = 0;
   defaultRate = DEFAULT_RATE;
 

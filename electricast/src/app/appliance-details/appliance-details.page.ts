@@ -15,7 +15,6 @@ export function provideStorage() {
   providers: [{provide: Storage, useFactory: provideStorage}]
 })
 export class ApplianceDetailsPage implements OnInit {
-  title = 'Appliance Details';
   applianceIndex = 0;
   appliance = {
     name: '',

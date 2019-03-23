@@ -14,7 +14,6 @@ export function provideStorage() {
 export class AppliancesListPage implements OnInit {
 
   objectKeys = Object.keys;
-  title = 'Appliances List';
   totalPower = 0;
   appliances = [];
 

@@ -10,7 +10,7 @@ export const DEFAULT_APPLIANCES = [
   },
   {
     name: 'Electric Fan',
-    icon: 'nuclear',
+    icon: 'fan',
     wattage: 55,
     timeUsed: 0,
     status: false,
@@ -18,7 +18,7 @@ export const DEFAULT_APPLIANCES = [
   },
   {
     name: 'Rice cooker',
-    icon: 'restaurant',
+    icon: 'rice-cooker',
     wattage: 450,
     timeUsed: 0,
     status: false,
@@ -26,7 +26,7 @@ export const DEFAULT_APPLIANCES = [
   },
   {
     name: 'Television',
-    icon: 'easel',
+    icon: 'tv',
     wattage: 180,
     timeUsed: 0,
     status: false,
@@ -34,7 +34,7 @@ export const DEFAULT_APPLIANCES = [
   },
   {
     name: 'Refrigerator',
-    icon: 'today',
+    icon: 'refrigerator',
     wattage: 300,
     timeUsed: 0,
     status: false,

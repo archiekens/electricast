@@ -38,7 +38,7 @@
     </ion-card-header>
     <ion-card-content class="button-list">
       <ion-button *ngFor="let key of objectKeys(appliances)" color="{{appliances[key].status ? 'primary' : 'light'}}" (click)="toggleAppliance(key)">
-        <ion-icon slot="icon-only" name="{{appliances[key].icon}}" size="large"></ion-icon>
+        <img src="assets/{{appliances[key].icon}}.png">
       </ion-button>
     </ion-card-content>
   </ion-card>

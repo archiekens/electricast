@@ -24,6 +24,7 @@ export class HomePage {
   runningAppliancesCount = 0;
   defaultAppliances = DEFAULT_APPLIANCES;
   defaultRate = DEFAULT_RATE;
+  lastMonthBill = '0.00';
 
   constructor(private router: Router, private storage: Storage) {
   }
@@ -46,6 +47,12 @@ export class HomePage {
             this.computeBill();
           });
         });
+      }
+    });
+
+    storage.get('last_month_bill').then((result) => {
+      if (result != false && result != null) {
+        this.lastMonthBill = result;
       }
     });
   }

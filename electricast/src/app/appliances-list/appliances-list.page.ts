@@ -45,7 +45,7 @@ export class AppliancesListPage implements OnInit {
       if (response.data !== false) {
         let appliance = {
           name: response.data.name,
-          type: response.data.type,
+          type: parseInt(response.data.type),
           wattage: response.data.wattage,
           timeUsed: 0,
           status: false,

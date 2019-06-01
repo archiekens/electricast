@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { DEFAULT_APPLIANCES, DEFAULT_RATE } from '../default-data';
+import { DataService } from '../services/data.service';
 
 import { Storage } from '@ionic/storage';
 export function provideStorage() {
@@ -25,28 +26,17 @@ export class HomePage {
   defaultAppliances = DEFAULT_APPLIANCES;
   defaultRate = DEFAULT_RATE;
 
-  constructor(private router: Router, private storage: Storage) {
+  constructor(
+      private router: Router,
+      private storage: Storage,
+      private dataService: DataService
+    ) {
   }
 
   ngOnInit(){
-    let storage = this.storage;
-    storage.get('app_opened_before').then((result) => {
-      if (result == false || result == null) {
-        storage.set('Appliances', this.defaultAppliances).then((result) => {
-          storage.set('app_opened_before', true);
-          this.appliances = this.defaultAppliances;
-          storage.set('Rate', this.defaultRate).then((result) => {
-            this.computeBill();
-          });
-        });
-      } else {
-        storage.get('Appliances').then((result) => {
-          this.appliances = result;
-          storage.get('Appliances').then((result) => {
-            this.computeBill();
-          });
-        });
-      }
+    this.dataService.appliances.subscribe(appliances => {
+      this.appliances = appliances;
+      this.computeBill();
     });
   }
 
@@ -59,6 +49,7 @@ export class HomePage {
       }
       storage.set('Appliances', result);
       this.appliances = result;
+      this.dataService.updateAppliances(this.appliances);
     });
   }
 

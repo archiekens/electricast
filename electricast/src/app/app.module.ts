@@ -8,6 +8,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { AddAppliancePageModule } from './modals/add-appliance/add-appliance.module';
 
 import { Storage } from '@ionic/storage';
 export function provideStorage() {
@@ -17,7 +18,7 @@ export function provideStorage() {
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, AddAppliancePageModule],
   providers: [
     {provide: Storage, useFactory: provideStorage},
     StatusBar,

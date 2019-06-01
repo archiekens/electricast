@@ -1,44 +1,58 @@
+/*
+  Appliance Types
+  1: Bulb
+  2: Fan
+  3: Rice cooker
+  4: TV
+  5: Refrigerator
+*/
+
 export const DEFAULT_APPLIANCES = [
   {
     name: 'Light Bulb',
-    icon: 'bulb',
+    type: 1,
     wattage: 15,
     timeUsed: 0,
     status: false,
-    lastUsed: null
+    lastUsed: null,
+    icon: 'bulb'
 
   },
   {
     name: 'Electric Fan',
-    icon: 'fan',
+    type: 2,
     wattage: 55,
     timeUsed: 0,
     status: false,
-    lastUsed: null
+    lastUsed: null,
+    icon: 'fan'
   },
   {
     name: 'Rice cooker',
-    icon: 'rice-cooker',
+    type: 3,
     wattage: 450,
     timeUsed: 0,
     status: false,
-    lastUsed: null
+    lastUsed: null,
+    icon: 'rice-cooker'
   },
   {
     name: 'Television',
-    icon: 'tv',
+    type: 4,
     wattage: 180,
     timeUsed: 0,
     status: false,
-    lastUsed: null
+    lastUsed: null,
+    icon: 'tv'
   },
   {
     name: 'Refrigerator',
-    icon: 'refrigerator',
+    type: 5,
     wattage: 300,
     timeUsed: 0,
     status: false,
-    lastUsed: null
+    lastUsed: null,
+    icon: 'refrigerator'
   }
 ];
 

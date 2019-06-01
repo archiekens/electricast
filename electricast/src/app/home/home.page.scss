@@ -46,6 +46,14 @@ ion-card-content {
   }
 }
 
+.button-content img{
+  margin-bottom: 4px;
+}
+
+ion-button.ion-color-primary img{
+  filter: invert(100%);
+}
+
 ion-tab-bar {
   ion-tab-button {
     color: #666;

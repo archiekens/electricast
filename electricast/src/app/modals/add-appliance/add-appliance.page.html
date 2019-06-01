@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add Appliance</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <ion-item>
+    <ion-label>Appliance Name</ion-label>
+    <ion-input placeholder="Kitchen Light" [(ngModel)]="appliance.name" slot="end" required></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Type of Appliance</ion-label>
+    <ion-select [(ngModel)]="appliance.type">
+      <ion-select-option value="1">Light Bulb</ion-select-option>
+      <ion-select-option value="2">Electric Fan</ion-select-option>
+      <ion-select-option value="3">Rice Cooker</ion-select-option>
+      <ion-select-option value="4">TV</ion-select-option>
+      <ion-select-option value="5">Refrigerator</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Wattage(W)</ion-label>
+    <ion-input placeholder="10" [(ngModel)]="appliance.wattage" type="number" slot="end" required></ion-input>
+  </ion-item>
+
+  <ion-label text-wrap color="danger" position="floating">{{errorMessage}}</ion-label>
+  <ion-button expand="block" (click)="addActivity()">Save</ion-button>
+  <ion-button expand="block" (click)="closeModal()" color="light">Cancel</ion-button>
+</ion-content>

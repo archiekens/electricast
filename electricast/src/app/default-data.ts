@@ -57,3 +57,28 @@ export const DEFAULT_APPLIANCES = [
 ];
 
 export const DEFAULT_RATE = 9.8385;
+
+export const ICON_NAMES = [
+  'aircon',
+  'blender',
+  'bulb',
+  'clothes-iron',
+  'coffee-maker',
+  'dish-washer',
+  'dryer',
+  'electric-stove',
+  'fan',
+  'hair-dryer',
+  'hair-iron',
+  'microwave',
+  'others',
+  'oven',
+  'radiator',
+  'refrigerator',
+  'rice-cooker',
+  'toaster',
+  'tv',
+  'vacuum',
+  'washing-machine',
+  'water-heater'
+];

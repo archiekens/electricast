@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { AddAppliancePage } from '../modals/add-appliance/add-appliance.page';
+import { ICON_NAMES } from '../default-data';
 
 import { Storage } from '@ionic/storage';
 export function provideStorage() {
@@ -50,26 +51,8 @@ export class AppliancesListPage implements OnInit {
           timeUsed: 0,
           status: false,
           lastUsed: null,
-          icon: ''
+          icon: ICON_NAMES[parseInt(response.data.type)]
         };
-
-        switch (parseInt(response.data.type)) {
-          case 1:
-            appliance.icon = 'bulb';
-            break;
-          case 2:
-            appliance.icon = 'fan';
-            break;
-          case 3:
-            appliance.icon = 'rice-cooker';
-            break;
-          case 4:
-            appliance.icon = 'tv';
-            break;
-          case 5:
-            appliance.icon = 'refrigerator';
-            break;
-        }
 
         this.storage.get('Appliances').then((result) => {
           this.appliances = result;

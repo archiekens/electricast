@@ -15,7 +15,8 @@ export const DEFAULT_APPLIANCES = [
     timeUsed: 0,
     status: false,
     lastUsed: null,
-    icon: 'bulb'
+    icon: 'bulb',
+    showInHome: true
 
   },
   {
@@ -25,7 +26,8 @@ export const DEFAULT_APPLIANCES = [
     timeUsed: 0,
     status: false,
     lastUsed: null,
-    icon: 'fan'
+    icon: 'fan',
+    showInHome: true
   },
   {
     name: 'Rice cooker',
@@ -34,7 +36,8 @@ export const DEFAULT_APPLIANCES = [
     timeUsed: 0,
     status: false,
     lastUsed: null,
-    icon: 'rice-cooker'
+    icon: 'rice-cooker',
+    showInHome: true
   },
   {
     name: 'Television',
@@ -43,7 +46,8 @@ export const DEFAULT_APPLIANCES = [
     timeUsed: 0,
     status: false,
     lastUsed: null,
-    icon: 'tv'
+    icon: 'tv',
+    showInHome: true
   },
   {
     name: 'Refrigerator',
@@ -52,7 +56,8 @@ export const DEFAULT_APPLIANCES = [
     timeUsed: 0,
     status: false,
     lastUsed: null,
-    icon: 'refrigerator'
+    icon: 'refrigerator',
+    showInHome: true
   }
 ];
 
@@ -65,20 +70,16 @@ export const ICON_NAMES = [
   'clothes-iron',
   'coffee-maker',
   'dish-washer',
-  'dryer',
   'electric-stove',
   'fan',
   'hair-dryer',
   'hair-iron',
   'microwave',
   'others',
-  'oven',
-  'radiator',
   'refrigerator',
   'rice-cooker',
   'toaster',
   'tv',
   'vacuum',
-  'washing-machine',
-  'water-heater'
+  'washing-machine'
 ];

@@ -10,7 +10,7 @@ export class AddAppliancePage implements OnInit {
 
   appliance = {
     name: '',
-    type: '1',
+    type: '0',
     wattage: ''
   };
 

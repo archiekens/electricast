@@ -51,7 +51,8 @@ export class AppliancesListPage implements OnInit {
           timeUsed: 0,
           status: false,
           lastUsed: null,
-          icon: ICON_NAMES[parseInt(response.data.type)]
+          icon: ICON_NAMES[parseInt(response.data.type)],
+          showInHome: false
         };
 
         this.storage.get('Appliances').then((result) => {

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { ToastController } from '@ionic/angular';
 import { DEFAULT_APPLIANCES } from '../default-data'
+import { AlertController } from '@ionic/angular';
+import {Router} from "@angular/router"
 
 import { Storage } from '@ionic/storage';
 export function provideStorage() {
@@ -32,7 +34,10 @@ export class ApplianceDetailsPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private storage: Storage,
-    public toastController: ToastController) {
+    public toastController: ToastController,
+    public alertController: AlertController,
+    private router: Router
+  ) {
   }
 
   async presentToast(message, type) {
@@ -78,6 +83,35 @@ export class ApplianceDetailsPage implements OnInit {
     });
   }
 
+  async deleteAppliance() {
+    const alert = await this.alertController.create({
+      header: 'Confirm Delete',
+      message: 'Are you sure you want to delete this appliance?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+        }, {
+          text: 'Ok',
+          handler: () => {
+            let storage = this.storage;
+            storage.get('Appliances').then((result) => {
+              result.splice(this.applianceIndex, 1);
+              storage.set('Appliances', result);
+              this.presentToast('Deleted successfully', "dark");
+              this.router.navigate(['/appliances-list']);
+            }).catch((error) => {
+              this.presentToast('Update failed', "danger");
+            });
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
   toggleAppliance(applianceIndex) {
     let storage = this.storage;
     storage.get('Appliances').then((result) => {
@@ -85,6 +119,14 @@ export class ApplianceDetailsPage implements OnInit {
       if (result[applianceIndex].status == true) {
         result[applianceIndex].lastUsed = this.getCurrentDateTime();
       }
+      storage.set('Appliances', result);
+    });
+  }
+
+  toggleHomeDisplay(applianceIndex) {
+    let storage = this.storage;
+    storage.get('Appliances').then((result) => {
+      result[applianceIndex].showInHome = !result[applianceIndex].showInHome;
       storage.set('Appliances', result);
     });
   }

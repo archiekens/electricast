@@ -36,12 +36,14 @@
   </ion-card>
   <ion-card>
     <ion-card-content class="button-list">
-      <ion-button *ngFor="let key of objectKeys(appliances)" color="{{appliances[key].status ? 'primary' : 'light'}}" (click)="toggleAppliance(key)">
-        <div class="button-content">
-          <img src="assets/{{appliances[key].icon}}.png">
-          <span>{{appliances[key].name}}</span>
-        </div>
-      </ion-button>
+      <ng-container *ngFor="let key of objectKeys(appliances)">
+        <ion-button *ngIf="appliances[key].showInHome" color="{{appliances[key].status ? 'primary' : 'light'}}" (click)="toggleAppliance(key)">
+          <div class="button-content">
+            <img src="assets/{{appliances[key].icon}}.png">
+            <span>{{appliances[key].name}}</span>
+          </div>
+        </ion-button>
+      </ng-container>
     </ion-card-content>
   </ion-card>
 </ion-content>

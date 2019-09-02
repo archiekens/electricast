@@ -93,6 +93,11 @@ export class HomePage {
           self.runningAppliancesCount = runningAppliances;
         });
       });
+      self.storage.get('last_month_bill').then((result) => {
+        if (result != false && result != null) {
+          self.lastMonthBill = result;
+        }
+      });
     }, 100);
   }
 

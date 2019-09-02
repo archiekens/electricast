@@ -63,12 +63,12 @@ export class AppComponent {
               for(let key of this.objectKeys(this.appliances)) {
                 let missingTimeUsed: any = 0;
                 let now: any = new Date();
-                let firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+                let firstDayOfMonth: any = new Date(now.getFullYear(), now.getMonth(), 1);
                 if (this.appliances[key].status == true && this.appliances[key].lastUsed != null) {
                   let lastUsedDate: any = new Date(this.appliances[key].lastUsed);
                   missingTimeUsed = (firstDayOfMonth - lastUsedDate) / 1000;
                 }
-                tmp[key] = this.appliances[key].lastUsed + missingTimeUsed;
+                tmp[key] = this.appliances[key].timeUsed + missingTimeUsed;
                 this.appliances[key].timeUsed = 0;
                 this.appliances[key].lastUsed = this.getCurrentDateTimeString(firstDayOfMonth);
               }

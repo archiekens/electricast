@@ -15,7 +15,7 @@
     <ion-card-content>
       <div class="total_bill-container">
         <ion-text>₱<span>{{totalBill}}</span></ion-text>
-        <ion-spinner color="primary"></ion-spinner>
+        <ion-spinner color="primary" paused="{{runningAppliancesCount > 0 ? false : true}}"></ion-spinner>
       </div>
       <ion-item lines="none">
         <ion-icon name="power" slot="start"></ion-icon>
